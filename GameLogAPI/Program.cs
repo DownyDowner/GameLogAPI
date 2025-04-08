@@ -1,5 +1,7 @@
 using FastEndpoints;
+using FastEndpoints.Swagger;
 using GameLogAPI.src.Data;
+using GameLogAPI.src.Features.Games;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,9 +11,11 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<GameDbContext>(options =>
     options.UseSqlite(connectionString));
 
-builder.Services.AddFastEndpoints();
+builder.Services.AddFastEndpoints()
+    .AddSwaggerDocument();
 
 var app = builder.Build();
 app.UseFastEndpoints();
+app.UseSwaggerGen();
 
 app.Run();
