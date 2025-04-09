@@ -14,6 +14,8 @@ builder.Services.AddDbContext<GameDbContext>(options =>
 builder.Services.AddFastEndpoints()
     .AddSwaggerDocument();
 
+builder.Services.AddScoped<GameService>();
+
 var app = builder.Build();
 app.UseFastEndpoints();
 app.UseSwaggerGen();
