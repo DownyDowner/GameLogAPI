@@ -12,6 +12,12 @@ namespace GameLogAPI.src.Features.Games {
             return game.Id;
         }
 
+        internal async Task<Game?> GetGame(Guid id) {
+            return await context
+                .Games
+                .FirstOrDefaultAsync(g => g.Id == id);
+        }
+
         internal async Task<IEnumerable<Game>> GetGames(CancellationToken ct) {
             return await context
                 .Games
