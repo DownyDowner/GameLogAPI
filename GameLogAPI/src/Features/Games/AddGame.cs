@@ -1,4 +1,5 @@
 ﻿using FastEndpoints;
+using FluentValidation;
 
 namespace GameLogAPI.src.Features.Games {
     public class AddGameEndpoint(GameService service) : Endpoint<AddGameRequest> {
@@ -14,4 +15,14 @@ namespace GameLogAPI.src.Features.Games {
     }
 
     public record AddGameRequest(string Title, string Platform);
+
+    public class AddGameRequestValidator : Validator<AddGameRequest> {
+        public AddGameRequestValidator() {
+            RuleFor(x => x.Title)
+                .NotEmpty();
+
+            RuleFor(x => x.Platform)
+                .NotEmpty();
+        }
+    }
 }
