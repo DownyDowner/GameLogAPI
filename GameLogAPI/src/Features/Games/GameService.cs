@@ -12,6 +12,14 @@ namespace GameLogAPI.src.Features.Games {
             return game.Id;
         }
 
+        internal async Task DeleteGame(Guid id) {
+            var game = await GetGame(id);
+            if (game == null)
+                throw new KeyNotFoundException();
+            context.Games.Remove(game);
+            await context.SaveChangesAsync();
+        }
+
         internal async Task<Game?> GetGame(Guid id) {
             return await context
                 .Games
