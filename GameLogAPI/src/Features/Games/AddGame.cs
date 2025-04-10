@@ -9,7 +9,7 @@ namespace GameLogAPI.src.Features.Games {
 
         public override async Task HandleAsync(AddGameRequest req, CancellationToken ct) {
             var id = await service.AddGame(req, ct);
-            await SendOkAsync(id, ct);
+            await SendCreatedAtAsync<GetGameEndpoint>(new { id }, null, cancellation: ct);
         }
     }
 
