@@ -3,10 +3,12 @@
 namespace GameLogAPI.src.Entities {
     public enum GameStatus {
         Wishlist,
+        Planned,
         Playing,
         Completed,
         Dropped
     }
+
     public class Game {
         public Guid Id { get; set; }
         [Required]
