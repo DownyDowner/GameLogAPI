@@ -20,7 +20,9 @@ namespace GameLogAPI.src.Repositories {
         }
 
         public async Task<Game?> GetByIdAsync(Guid id, CancellationToken ct) {
-            return await context.Games.FirstOrDefaultAsync(g => g.Id == id, ct);
+            return await context.Games
+                .Include(g => g.Platform)
+                .FirstOrDefaultAsync(g => g.Id == id, ct);
         }
 
         public async Task<IEnumerable<Game>> GetAllAsync(CancellationToken ct) {

@@ -18,7 +18,7 @@ namespace GameLogAPI.src.Features.Games {
             await SendOkAsync(new GetGameResponse(
                 Id: game.Id,
                 Title: game.Title,
-                Platform: game.Platform,
+                Platform: game.Platform!.Name,
                 ReleaseDate: game.ReleaseDate,
                 Status: game.Status,
                 Rating: game.Rating,

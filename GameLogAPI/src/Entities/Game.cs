@@ -14,7 +14,7 @@ namespace GameLogAPI.src.Entities {
         [Required]
         public string Title { get; set; } = string.Empty;
         [Required]
-        public string Platform { get; set; } = string.Empty;
+        public Guid IdPlatform { get; set; }
         [Required]
         public DateOnly ReleaseDate { get; set; }
         [Required]
@@ -24,5 +24,7 @@ namespace GameLogAPI.src.Entities {
         public string? Review { get; set; }
         public DateTime? StartedOn { get; set; }
         public DateTime? CompletedOn { get; set; }
+
+        public Platform? Platform { get; set; }
     }
 }
