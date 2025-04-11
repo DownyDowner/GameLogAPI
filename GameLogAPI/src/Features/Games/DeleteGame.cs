@@ -1,4 +1,5 @@
 ﻿using FastEndpoints;
+using GameLogAPI.src.Services;
 
 namespace GameLogAPI.src.Features.Games {
     public class DeleteGameEndpoint(GameService service) : Endpoint<DeleteGameRequest> {
@@ -9,7 +10,7 @@ namespace GameLogAPI.src.Features.Games {
 
         public override async Task HandleAsync(DeleteGameRequest req, CancellationToken ct) {
             try {
-                await service.DeleteGame(req.Id);
+                await service.DeleteGame(req.Id, ct);
                 await SendNoContentAsync(ct);
             } catch (KeyNotFoundException) {
                 await SendNotFoundAsync(ct);

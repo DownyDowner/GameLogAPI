@@ -1,5 +1,6 @@
 ﻿using FastEndpoints;
 using FluentValidation;
+using GameLogAPI.src.Services;
 
 namespace GameLogAPI.src.Features.Games {
     public class AddGameEndpoint(GameService service) : Endpoint<AddGameRequest> {

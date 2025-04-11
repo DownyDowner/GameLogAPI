@@ -1,7 +1,8 @@
 using FastEndpoints;
 using FastEndpoints.Swagger;
 using GameLogAPI.src.Data;
-using GameLogAPI.src.Features.Games;
+using GameLogAPI.src.Repositories;
+using GameLogAPI.src.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder();
@@ -14,6 +15,7 @@ builder.Services
    .AddFastEndpoints()
    .SwaggerDocument();
 
+builder.Services.AddScoped<IGameRepository, GameRepository>();
 builder.Services.AddScoped<GameService>();
 
 var app = builder.Build();

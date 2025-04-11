@@ -1,4 +1,5 @@
 ﻿using FastEndpoints;
+using GameLogAPI.src.Services;
 
 namespace GameLogAPI.src.Features.Games {
     public class GetGamesEndpoint(GameService service) : EndpointWithoutRequest<IEnumerable<GetGamesResponse>> {
