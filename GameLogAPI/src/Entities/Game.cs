@@ -16,6 +16,8 @@ namespace GameLogAPI.src.Entities {
         [Required]
         public string Platform { get; set; } = string.Empty;
         [Required]
+        public DateOnly ReleaseDate { get; set; }
+        [Required]
         public GameStatus Status { get; set; } = GameStatus.Wishlist;
         [Range(1, 10)]
         public int? Rating { get; set; }

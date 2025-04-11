@@ -19,15 +19,16 @@ namespace GameLogAPI.src.Features.Games {
                 Id: game.Id,
                 Title: game.Title,
                 Platform: game.Platform,
+                ReleaseDate: game.ReleaseDate,
                 Status: game.Status,
                 Rating: game.Rating,
                 Review: game.Review,
-                StartedOn: game.StartedOn.HasValue ? DateOnly.FromDateTime(game.StartedOn.Value) : null,
-                CompletedOn: game.CompletedOn.HasValue ? DateOnly.FromDateTime(game.CompletedOn.Value) : null
+                StartedOn: game.StartedOn,
+                CompletedOn: game.CompletedOn
             ), ct);
         }
     }
 
     public record GetGameRequest(Guid Id);
-    public record GetGameResponse(Guid Id, string Title, string Platform, GameStatus Status, int? Rating, string? Review, DateOnly? StartedOn, DateOnly? CompletedOn);
+    public record GetGameResponse(Guid Id, string Title, string Platform, DateOnly ReleaseDate, GameStatus Status, int? Rating, string? Review, DateTime? StartedOn, DateTime? CompletedOn);
 }

@@ -10,9 +10,9 @@ namespace GameLogAPI.src.Features.Games {
 
         public override async Task<IEnumerable<GetGamesResponse>> ExecuteAsync(CancellationToken ct) {
             var games = await service.GetGames(ct);
-            return games.Select(e => new GetGamesResponse(e.Id, e.Title, e.Platform));
+            return games.Select(e => new GetGamesResponse(e.Id, e.Title, e.Platform, e.ReleaseDate));
         }
     }
 
-    public record GetGamesResponse(Guid Id, string Title,string Platform);
+    public record GetGamesResponse(Guid Id, string Title, string Platform, DateOnly ReleaseDate);
 }

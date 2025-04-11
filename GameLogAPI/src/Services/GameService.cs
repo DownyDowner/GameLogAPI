@@ -5,7 +5,7 @@ using GameLogAPI.src.Repositories;
 namespace GameLogAPI.src.Services {
     public class GameService(IGameRepository repository) {
         internal async Task<Guid> AddGame(AddGameRequest req, CancellationToken ct) {
-            var game = new Game { Title= req.Title, Platform = req.Platform };
+            var game = new Game { Title= req.Title, Platform = req.Platform, ReleaseDate = req.ReleaseDate };
             return await repository.AddAsync(game, ct);
         }
 

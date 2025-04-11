@@ -15,7 +15,7 @@ namespace GameLogAPI.src.Features.Games {
         }
     }
 
-    public record AddGameRequest(string Title, string Platform);
+    public record AddGameRequest(string Title, string Platform, DateOnly ReleaseDate);
 
     public class AddGameRequestValidator : Validator<AddGameRequest> {
         public AddGameRequestValidator() {
@@ -23,6 +23,9 @@ namespace GameLogAPI.src.Features.Games {
                 .NotEmpty();
 
             RuleFor(x => x.Platform)
+                .NotEmpty();
+
+            RuleFor(x => x.ReleaseDate)
                 .NotEmpty();
         }
     }
