@@ -26,8 +26,9 @@ namespace GameLogAPI.src.Repositories {
         }
 
         public async Task<IEnumerable<Game>> GetAllAsync(CancellationToken ct) {
-            return await context.Games.ToListAsync(ct);
+            return await context.Games
+                .Include(g => g.Platform)
+                .ToListAsync(ct);
         }
     }
-
 }

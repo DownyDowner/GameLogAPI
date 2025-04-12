@@ -18,6 +18,9 @@ builder.Services
 builder.Services.AddScoped<IGameRepository, GameRepository>();
 builder.Services.AddScoped<GameService>();
 
+builder.Services.AddScoped<IPlatformRepository, PlatformRepository>();
+builder.Services.AddScoped<PlatformService>();
+
 var app = builder.Build();
 app.UseFastEndpoints()
    .UseSwaggerGen();
