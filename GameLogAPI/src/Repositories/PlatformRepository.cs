@@ -14,8 +14,9 @@ namespace GameLogAPI.src.Repositories {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Platform>> GetAllAsync(CancellationToken ct) {
-            throw new NotImplementedException();
+        public async Task<IEnumerable<Platform>> GetAllAsync(CancellationToken ct) {
+            return await context.Platforms
+                .ToListAsync(ct);
         }
 
         public async Task<Platform?> GetByIdAsync(Guid id, CancellationToken ct) {

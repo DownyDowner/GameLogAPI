@@ -12,5 +12,9 @@ namespace GameLogAPI.src.Services {
         internal async Task<Platform?> GetPlatform(Guid id, CancellationToken ct) {
             return await repository.GetByIdAsync(id, ct);
         }
+
+        internal async Task<IEnumerable<Platform>> GetPlatforms(CancellationToken ct) {
+            return await repository.GetAllAsync(ct);
+        }
     }
 }
