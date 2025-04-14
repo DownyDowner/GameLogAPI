@@ -1,5 +1,6 @@
 ﻿using GameLogAPI.src.Entities;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace GameLogAPI.src.Data {
     public class GameDbContext : DbContext {
@@ -13,6 +14,11 @@ namespace GameLogAPI.src.Data {
                 builder.HasOne(e => e.Platform)
                     .WithMany(e => e.Games)
                     .HasForeignKey(e => e.IdPlatform);
+            });
+
+            modelBuilder.Entity<Platform>(builder => {
+                builder.HasIndex(e => e.Name)
+                .IsUnique();
             });
         }
 
