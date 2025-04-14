@@ -9,6 +9,10 @@ namespace GameLogAPI.src.Services {
             return await repository.AddAsync(platform, ct);
         }
 
+        internal async Task DeletePlatform(Guid id, CancellationToken ct) {
+            await repository.DeleteAsync(id, ct);
+        }
+
         internal async Task<Platform?> GetPlatform(Guid id, CancellationToken ct) {
             return await repository.GetByIdAsync(id, ct);
         }

@@ -10,8 +10,13 @@ namespace GameLogAPI.src.Repositories {
             return entity.Id;
         }
 
-        public Task DeleteAsync(Guid id, CancellationToken ct) {
-            throw new NotImplementedException();
+        public async Task DeleteAsync(Guid id, CancellationToken ct) {
+            var platform = await context.Platforms
+                .FirstOrDefaultAsync(x => x.Id == id);
+            if (platform == null) 
+                throw new KeyNotFoundException();
+            context.Platforms.Remove(platform);
+            await context.SaveChangesAsync(ct);
         }
 
         public async Task<IEnumerable<Platform>> GetAllAsync(CancellationToken ct) {
