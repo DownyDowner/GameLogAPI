@@ -1,5 +1,6 @@
 ﻿using GameLogAPI.src.Data;
 using GameLogAPI.src.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace GameLogAPI.src.Repositories {
     public class PlatformRepository(GameDbContext context) : IPlatformRepository {
@@ -17,8 +18,10 @@ namespace GameLogAPI.src.Repositories {
             throw new NotImplementedException();
         }
 
-        public Task<Platform?> GetByIdAsync(Guid id, CancellationToken ct) {
-            throw new NotImplementedException();
+        public async Task<Platform?> GetByIdAsync(Guid id, CancellationToken ct) {
+            return await context.Platforms
+                .Include(x => x.Games)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using FastEndpoints;
 using FluentValidation;
+using GameLogAPI.src.Features.Games;
 using GameLogAPI.src.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +14,7 @@ namespace GameLogAPI.src.Features.Platforms {
         public override async Task HandleAsync(AddPlatformRequest req, CancellationToken ct) {
             try {
                 var id = await service.AddPlatform(req, ct);
-                await SendOkAsync(id, ct);
+                await SendCreatedAtAsync<GetPlatformEndpoint>(new { id }, null, cancellation: ct);
             } catch (DbUpdateException) {
                 await SendErrorsAsync(cancellation: ct);
             }

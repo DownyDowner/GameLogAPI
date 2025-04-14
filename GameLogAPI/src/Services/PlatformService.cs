@@ -8,5 +8,9 @@ namespace GameLogAPI.src.Services {
             var platform = new Platform { Name = req.Name };
             return await repository.AddAsync(platform, ct);
         }
+
+        internal async Task<Platform?> GetPlatform(Guid id, CancellationToken ct) {
+            return await repository.GetByIdAsync(id, ct);
+        }
     }
 }
