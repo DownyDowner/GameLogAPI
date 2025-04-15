@@ -20,5 +20,9 @@ namespace GameLogAPI.src.Services {
         internal async Task<IEnumerable<Platform>> GetPlatforms(CancellationToken ct) {
             return await repository.GetAllAsync(ct);
         }
+
+        internal async Task UpdatePlatform(UpdatePlatformRequest req, CancellationToken ct) {
+            await repository.UpdateNameAsync(req.Id, req.Name, ct);
+        }
     }
 }

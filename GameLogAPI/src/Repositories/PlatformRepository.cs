@@ -29,5 +29,14 @@ namespace GameLogAPI.src.Repositories {
                 .Include(x => x.Games)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
+
+        public async Task UpdateNameAsync(Guid id, string name, CancellationToken ct) {
+            var platform = await context.Platforms
+                .FirstOrDefaultAsync(x => x.Id == id);
+            if (platform == null)
+                throw new KeyNotFoundException();
+            platform.Name = name;
+            await context.SaveChangesAsync(ct);
+        }
     }
 }
