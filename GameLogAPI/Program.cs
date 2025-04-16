@@ -1,5 +1,6 @@
 using FastEndpoints;
 using FastEndpoints.Swagger;
+using GameLogAPI.Middlewares;
 using GameLogAPI.src.Data;
 using GameLogAPI.src.Repositories;
 using GameLogAPI.src.Services;
@@ -15,6 +16,9 @@ builder.Services
    .AddFastEndpoints()
    .SwaggerDocument();
 
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 builder.Services.AddScoped<IGameRepository, GameRepository>();
 builder.Services.AddScoped<GameService>();
 
@@ -24,6 +28,7 @@ builder.Services.AddScoped<PlatformService>();
 var app = builder.Build();
 app.UseFastEndpoints()
    .UseSwaggerGen();
-app.Run();
+
+app.UseExceptionHandler();
 
 app.Run();
