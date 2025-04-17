@@ -20,7 +20,7 @@ namespace GameLogAPI.src.Features.Games {
                 Title: game.Title,
                 Platform: game.Platform!.Name,
                 ReleaseDate: game.ReleaseDate,
-                Status: game.Status,
+                Status: game.Status.ToString(),
                 Rating: game.Rating,
                 Review: game.Review,
                 StartedOn: game.StartedOn,
@@ -30,5 +30,5 @@ namespace GameLogAPI.src.Features.Games {
     }
 
     public record GetGameRequest(Guid Id);
-    public record GetGameResponse(Guid Id, string Title, string Platform, DateOnly ReleaseDate, GameStatus Status, int? Rating, string? Review, DateTime? StartedOn, DateTime? CompletedOn);
+    public record GetGameResponse(Guid Id, string Title, string Platform, DateOnly ReleaseDate, string Status, int? Rating, string? Review, DateTime? StartedOn, DateTime? CompletedOn);
 }
