@@ -30,5 +30,18 @@ namespace GameLogAPI.src.Repositories {
                 .Include(g => g.Platform)
                 .ToListAsync(ct);
         }
+
+        public async Task UpdateGameStatusAsync(Guid id, GameStatus status, CancellationToken ct) {
+            var game = await context.Games
+                .FirstOrDefaultAsync(g => g.Id == id, ct);
+            if (game == null)
+                throw new KeyNotFoundException();
+
+            game.Status = status;
+            if (status == GameStatus.Playing)
+                game.StartedOn = DateTime.Now;
+
+            await context.SaveChangesAsync(ct);
+        }
     }
 }
