@@ -24,5 +24,9 @@ namespace GameLogAPI.src.Services {
         internal async Task UpdateGameStatus(Guid id, GameStatus status, CancellationToken ct) {
             await repository.UpdateGameStatusAsync(id, status, ct);
         }
+
+        internal async Task UpdateGameStatusWithReview(Guid id, GameStatus status, int? rating, string? review, CancellationToken ct) {
+            await repository.UpdateGameStatusWithReviewAsync(id, status, rating, review, ct);
+        }
     }
 }

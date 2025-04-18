@@ -36,4 +36,48 @@ namespace GameLogAPI.src.Features.Games {
             }
         }
     }
+
+    public class SetGameStatusToCompletedEndpoint(GameService service) : Endpoint<SetGameStatusWithReviewRequest> {
+        public override void Configure() {
+            Patch("games/{id:guid}/completed");
+            AllowAnonymous();
+        }
+
+        public override async Task HandleAsync(SetGameStatusWithReviewRequest req, CancellationToken ct) {
+            try {
+                await service.UpdateGameStatusWithReview(req.Id, GameStatus.Completed, req.Rating, req.Review, ct);
+                await SendNoContentAsync(ct);
+            } catch (KeyNotFoundException) {
+                await SendNotFoundAsync(ct);
+            }
+        }
+    }
+
+    public class SetGameStatusToDroppedEndpoint(GameService service) : Endpoint<SetGameStatusWithReviewRequest> {
+        public override void Configure() {
+            Patch("games/{id:guid}/dropped");
+            AllowAnonymous();
+        }
+
+        public override async Task HandleAsync(SetGameStatusWithReviewRequest req, CancellationToken ct) {
+            try {
+                await service.UpdateGameStatusWithReview(req.Id, GameStatus.Dropped, req.Rating, req.Review, ct);
+                await SendNoContentAsync(ct);
+            } catch (KeyNotFoundException) {
+                await SendNotFoundAsync(ct);
+            }
+        }
+    }
+
+    public record SetGameStatusWithReviewRequest {
+        public Guid Id { get; init; }
+        public int? Rating { get; init; }
+        public string? Review { get; init; }
+
+        public SetGameStatusWithReviewRequest(Guid id, int? rating, string? review) {
+            Id = id;
+            Rating = rating;
+            Review = string.IsNullOrWhiteSpace(review) ? null : review;
+        }
+    }
 }
