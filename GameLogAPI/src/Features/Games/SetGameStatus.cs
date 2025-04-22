@@ -10,13 +10,9 @@ namespace GameLogAPI.src.Features.Games {
         }
 
         public override async Task HandleAsync(CancellationToken ct) {
-            try {
-                var id = Route<Guid>("id");
-                await service.UpdateGameStatus(id, GameStatus.Planned, ct);
-                await SendNoContentAsync(ct);
-            } catch (KeyNotFoundException) {
-                await SendNotFoundAsync(ct);
-            }
+            var id = Route<Guid>("id");
+            await service.UpdateGameStatus(id, GameStatus.Planned, ct);
+            await SendNoContentAsync(ct);
         }
     }
 
@@ -27,13 +23,9 @@ namespace GameLogAPI.src.Features.Games {
         }
 
         public override async Task HandleAsync(CancellationToken ct) {
-            try {
-                var id = Route<Guid>("id");
-                await service.UpdateGameStatus(id, GameStatus.Playing, ct);
-                await SendNoContentAsync(ct);
-            } catch (KeyNotFoundException) {
-                await SendNotFoundAsync(ct);
-            }
+            var id = Route<Guid>("id");
+            await service.UpdateGameStatus(id, GameStatus.Playing, ct);
+            await SendNoContentAsync(ct);
         }
     }
 
@@ -44,12 +36,8 @@ namespace GameLogAPI.src.Features.Games {
         }
 
         public override async Task HandleAsync(SetGameStatusWithReviewRequest req, CancellationToken ct) {
-            try {
-                await service.UpdateGameStatusWithReview(req.Id, GameStatus.Completed, req.Rating, req.Review, ct);
-                await SendNoContentAsync(ct);
-            } catch (KeyNotFoundException) {
-                await SendNotFoundAsync(ct);
-            }
+            await service.UpdateGameStatusWithReview(req.Id, GameStatus.Completed, req.Rating, req.Review, ct);
+            await SendNoContentAsync(ct);
         }
     }
 
@@ -60,12 +48,8 @@ namespace GameLogAPI.src.Features.Games {
         }
 
         public override async Task HandleAsync(SetGameStatusWithReviewRequest req, CancellationToken ct) {
-            try {
-                await service.UpdateGameStatusWithReview(req.Id, GameStatus.Dropped, req.Rating, req.Review, ct);
-                await SendNoContentAsync(ct);
-            } catch (KeyNotFoundException) {
-                await SendNotFoundAsync(ct);
-            }
+            await service.UpdateGameStatusWithReview(req.Id, GameStatus.Dropped, req.Rating, req.Review, ct);
+            await SendNoContentAsync(ct);
         }
     }
 

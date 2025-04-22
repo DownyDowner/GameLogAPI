@@ -12,12 +12,8 @@ namespace GameLogAPI.src.Features.Platforms {
         }
 
         public override async Task HandleAsync(AddPlatformRequest req, CancellationToken ct) {
-            try {
-                var id = await service.AddPlatform(req, ct);
-                await SendCreatedAtAsync<GetPlatformEndpoint>(new { id }, null, cancellation: ct);
-            } catch (DbUpdateException) {
-                await SendErrorsAsync(cancellation: ct);
-            }
+            var id = await service.AddPlatform(req, ct);
+            await SendCreatedAtAsync<GetPlatformEndpoint>(new { id }, null, cancellation: ct);
         }
     }
 

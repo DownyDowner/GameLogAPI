@@ -12,14 +12,8 @@ namespace GameLogAPI.src.Features.Platforms {
         }
 
         public override async Task HandleAsync(UpdatePlatformRequest req, CancellationToken ct) {
-            try {
-                await service.UpdatePlatform(req, ct);
-                await SendNoContentAsync(ct);
-            } catch (KeyNotFoundException) {
-                await SendNotFoundAsync(ct);
-            } catch (DbUpdateException) {
-                await SendErrorsAsync(cancellation: ct);
-            }
+            await service.UpdatePlatform(req, ct);
+            await SendNoContentAsync(ct);
         }
     }
 

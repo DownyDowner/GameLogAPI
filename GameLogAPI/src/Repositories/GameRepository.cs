@@ -1,5 +1,6 @@
 ﻿using GameLogAPI.src.Data;
 using GameLogAPI.src.Entities;
+using GameLogAPI.src.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameLogAPI.src.Repositories {
@@ -14,7 +15,8 @@ namespace GameLogAPI.src.Repositories {
         public async Task DeleteAsync(Guid id, CancellationToken ct) {
             var game = await context.Games.FirstOrDefaultAsync(g => g.Id == id, ct);
             if (game == null)
-                throw new KeyNotFoundException();
+                throw new ServiceException($"Game with ID {id} was not found.", StatusCodes.Status404NotFound);
+
             context.Games.Remove(game);
             await context.SaveChangesAsync(ct);
         }
@@ -34,8 +36,9 @@ namespace GameLogAPI.src.Repositories {
         public async Task UpdateGameStatusAsync(Guid id, GameStatus status, CancellationToken ct) {
             var game = await context.Games
                 .FirstOrDefaultAsync(g => g.Id == id, ct);
+
             if (game == null)
-                throw new KeyNotFoundException();
+                throw new ServiceException($"Cannot update status: game with ID {id} was not found.", StatusCodes.Status404NotFound);
 
             game.Status = status;
             if (status == GameStatus.Playing)
@@ -47,12 +50,14 @@ namespace GameLogAPI.src.Repositories {
         public async Task UpdateGameStatusWithReviewAsync(Guid id, GameStatus status, int? rating, string? review, CancellationToken ct) {
             var game = await context.Games
                 .FirstOrDefaultAsync(g => g.Id == id, ct);
+
             if (game == null)
-                throw new KeyNotFoundException();
+                throw new ServiceException($"Cannot update status and review: game with ID {id} was not found.", StatusCodes.Status404NotFound);
 
             game.Status = status;
             game.Rating = rating;
             game.Review = review;
+
             if (status == GameStatus.Completed)
                 game.CompletedOn = DateTime.Now;
 

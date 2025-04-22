@@ -9,12 +9,8 @@ namespace GameLogAPI.src.Features.Platforms {
         }
 
         public override async Task HandleAsync(DeletePlatformRequest req, CancellationToken ct) {
-            try {
-                await service.DeletePlatform(req.Id, ct);
-                await SendNoContentAsync(ct);
-            } catch (KeyNotFoundException) {
-                await SendNotFoundAsync(ct);
-            }
+            await service.DeletePlatform(req.Id, ct);
+            await SendNoContentAsync(ct);
         }
     }
 

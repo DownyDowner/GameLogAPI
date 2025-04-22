@@ -1,5 +1,6 @@
 ﻿using GameLogAPI.src.Data;
 using GameLogAPI.src.Entities;
+using GameLogAPI.src.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameLogAPI.src.Repositories {
@@ -12,29 +13,32 @@ namespace GameLogAPI.src.Repositories {
 
         public async Task DeleteAsync(Guid id, CancellationToken ct) {
             var platform = await context.Platforms
-                .FirstOrDefaultAsync(x => x.Id == id);
-            if (platform == null) 
-                throw new KeyNotFoundException();
+                .FirstOrDefaultAsync(x => x.Id == id, ct);
+
+            if (platform == null)
+                throw new ServiceException($"Platform with ID {id} was not found.", StatusCodes.Status404NotFound);
+
             context.Platforms.Remove(platform);
             await context.SaveChangesAsync(ct);
         }
 
         public async Task<IEnumerable<Platform>> GetAllAsync(CancellationToken ct) {
-            return await context.Platforms
-                .ToListAsync(ct);
+            return await context.Platforms.ToListAsync(ct);
         }
 
         public async Task<Platform?> GetByIdAsync(Guid id, CancellationToken ct) {
             return await context.Platforms
                 .Include(x => x.Games)
-                .FirstOrDefaultAsync(x => x.Id == id);
+                .FirstOrDefaultAsync(x => x.Id == id, ct);
         }
 
         public async Task UpdateNameAsync(Guid id, string name, CancellationToken ct) {
             var platform = await context.Platforms
-                .FirstOrDefaultAsync(x => x.Id == id);
+                .FirstOrDefaultAsync(x => x.Id == id, ct);
+
             if (platform == null)
-                throw new KeyNotFoundException();
+                throw new ServiceException($"Cannot update: platform with ID {id} was not found.", StatusCodes.Status404NotFound);
+
             platform.Name = name;
             await context.SaveChangesAsync(ct);
         }
