@@ -26,10 +26,15 @@ namespace GameLogAPI.src.Repositories {
             return await context.Platforms.ToListAsync(ct);
         }
 
-        public async Task<Platform?> GetByIdAsync(Guid id, CancellationToken ct) {
-            return await context.Platforms
+        public async Task<Platform> GetByIdAsync(Guid id, CancellationToken ct) {
+            var platform = await context.Platforms
                 .Include(x => x.Games)
                 .FirstOrDefaultAsync(x => x.Id == id, ct);
+
+            if (platform == null)
+                throw new ServiceException($"Platform with ID {id} was not found.", StatusCodes.Status404NotFound);
+
+            return platform;
         }
 
         public async Task UpdateNameAsync(Guid id, string name, CancellationToken ct) {

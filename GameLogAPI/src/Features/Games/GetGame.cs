@@ -1,5 +1,4 @@
 ﻿using FastEndpoints;
-using GameLogAPI.src.Entities;
 using GameLogAPI.src.Services;
 
 namespace GameLogAPI.src.Features.Games {
@@ -11,10 +10,6 @@ namespace GameLogAPI.src.Features.Games {
 
         public override async Task HandleAsync(GetGameRequest req, CancellationToken ct) {
             var game = await service.GetGame(req.Id, ct);
-            if (game == null) {
-                await SendNotFoundAsync(ct);
-                return;
-            }
             await SendOkAsync(new GetGameResponse(
                 Id: game.Id,
                 Title: game.Title,

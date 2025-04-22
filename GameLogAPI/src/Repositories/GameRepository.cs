@@ -21,10 +21,15 @@ namespace GameLogAPI.src.Repositories {
             await context.SaveChangesAsync(ct);
         }
 
-        public async Task<Game?> GetByIdAsync(Guid id, CancellationToken ct) {
-            return await context.Games
+        public async Task<Game> GetByIdAsync(Guid id, CancellationToken ct) {
+            var game = await context.Games
                 .Include(g => g.Platform)
                 .FirstOrDefaultAsync(g => g.Id == id, ct);
+
+            if (game == null)
+                throw new ServiceException($"Game with ID {id} was not found.", StatusCodes.Status404NotFound);
+
+            return game;
         }
 
         public async Task<IEnumerable<Game>> GetAllAsync(CancellationToken ct) {

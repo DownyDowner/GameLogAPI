@@ -10,10 +10,6 @@ namespace GameLogAPI.src.Features.Platforms {
 
         public override async Task HandleAsync(GetPlatformRequest req, CancellationToken ct) {
             var platform = await service.GetPlatform(req.Id, ct);
-            if (platform == null) {
-                await SendNotFoundAsync(ct);
-                return;
-            }
             await SendOkAsync(new GetPlatformResponse(
                 Id: platform.Id,
                 Name: platform.Name,
