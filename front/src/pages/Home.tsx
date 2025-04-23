@@ -35,18 +35,21 @@ function Home() {
             and fun.
           </p>
           <div className="text-center mt-4">
-            <button
+            <motion.button
+              whileHover={{ scale: 1.1 }}
               className="btn btn-primary mx-2"
               onClick={handleGoToPlatforms}
             >
               Platforms
-            </button>
-            <button
+            </motion.button>
+
+            <motion.button
+              whileHover={{ scale: 1.1 }}
               className="btn btn-secondary mx-2"
               onClick={() => console.log("Games")}
             >
               Games
-            </button>
+            </motion.button>
           </div>
         </div>
       </motion.div>
