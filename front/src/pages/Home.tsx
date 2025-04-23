@@ -1,6 +1,14 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../router/Routes";
 
 function Home() {
+  const navigate = useNavigate();
+
+  const handleGoToPlatforms = () => {
+    navigate(ROUTES.PLATFORMS);
+  };
+
   return (
     <div className="d-lg-flex justify-content-lg-center align-items-lg-center min-vh-100">
       <motion.div
@@ -29,7 +37,7 @@ function Home() {
           <div className="text-center mt-4">
             <button
               className="btn btn-primary mx-2"
-              onClick={() => console.log("Platforms")}
+              onClick={handleGoToPlatforms}
             >
               Platforms
             </button>
