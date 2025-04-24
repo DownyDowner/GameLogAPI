@@ -16,6 +16,15 @@ builder.Services
    .AddFastEndpoints()
    .SwaggerDocument();
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+builder.Services.AddCors(options => {
+    options.AddPolicy(MyAllowSpecificOrigins,
+        builder => builder.WithOrigins("http://localhost:5173")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod());
+});
+
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
@@ -28,6 +37,8 @@ builder.Services.AddScoped<PlatformService>();
 var app = builder.Build();
 app.UseFastEndpoints()
    .UseSwaggerGen();
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseExceptionHandler();
 
