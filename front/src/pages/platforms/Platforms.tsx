@@ -3,6 +3,7 @@ import { getPlatforms } from "../../apis/PlatformApi";
 import { PlatformList } from "../../models/PlatformList";
 import { Navigate } from "react-router-dom";
 import { ROUTES } from "../../router/Routes";
+import Loader from "../../components/Loader";
 
 function Platforms() {
   const [platforms, setPlatforms] = useState<PlatformList[] | null>(null);
@@ -21,7 +22,7 @@ function Platforms() {
       });
   }, []);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loader />;
   if (error) return <Navigate to={ROUTES.HOME} replace />;
 
   return (
