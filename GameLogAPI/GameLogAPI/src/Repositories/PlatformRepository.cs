@@ -23,7 +23,9 @@ namespace GameLogAPI.src.Repositories {
         }
 
         public async Task<IEnumerable<Platform>> GetAllAsync(CancellationToken ct) {
-            return await context.Platforms.ToListAsync(ct);
+            return await context.Platforms
+                .OrderBy(e => e.Name)
+                .ToListAsync(ct);
         }
 
         public async Task<Platform> GetByIdAsync(Guid id, CancellationToken ct) {

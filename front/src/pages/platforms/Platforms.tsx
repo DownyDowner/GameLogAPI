@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { getPlatforms } from "../../apis/PlatformApi";
+import { PlatformList } from "../../models/PlatformList";
+import { Navigate } from "react-router-dom";
+import { ROUTES } from "../../router/Routes";
 
 function Platforms() {
-  const [platforms, setPlatforms] = useState(null);
+  const [platforms, setPlatforms] = useState<PlatformList[] | null>(null);
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -19,9 +22,26 @@ function Platforms() {
   }, []);
 
   if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error loading data!</p>;
+  if (error) return <Navigate to={ROUTES.HOME} replace />;
 
-  return <p>Data Loaded</p>;
+  return (
+    <div className="container">
+      {platforms && platforms.length > 0 ? (
+        <ol className="list-group">
+          {platforms.map((platform) => (
+            <li
+              key={platform.id}
+              className="list-group-item d-flex justify-content-between align-items-start"
+            >
+              <div>{platform.name}</div>
+            </li>
+          ))}
+        </ol>
+      ) : (
+        <p>No platforms found.</p>
+      )}
+    </div>
+  );
 }
 
 export default Platforms;
