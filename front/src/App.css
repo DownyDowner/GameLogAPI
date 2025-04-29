@@ -8,7 +8,6 @@
   border-left: 2px solid #a6caf0;
   background-color: #ebe9ed;
   box-shadow: inset 1px 1px 0px #ffffff, inset -1px -1px 0px #808080;
-  width: 65%;
   margin: 0 auto;
 }
 
@@ -49,7 +48,6 @@
   color: black;
   text-align: center;
   display: block;
-  width: 60%;
 }
 
 .xp-button:hover {

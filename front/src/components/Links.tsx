@@ -21,10 +21,22 @@ function Links() {
       name: "TikTok",
       url: "https://www.tiktok.com/@bobov__",
     },
+    {
+      name: "GitHub",
+      url: "https://github.com/DownyDowner",
+    },
+    {
+      name: "Speedrun.com",
+      url: "https://www.speedrun.com/users/DownyDowner",
+    },
+    {
+      name: "Youtube",
+      url: "https://www.youtube.com/@downydowner",
+    },
   ];
 
   return (
-    <div className="xp-window p-2 mt-2">
+    <div className="xp-window p-2 mt-2 w-75">
       <div className="xp-title-bar d-flex justify-content-between align-items-center">
         <span>Mes Liens</span>
         <div>
@@ -50,7 +62,7 @@ function Links() {
             href={link.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="xp-button"
+            className="xp-button w-50"
           >
             {link.name}
           </a>
