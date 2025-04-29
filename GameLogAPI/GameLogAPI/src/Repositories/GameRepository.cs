@@ -68,5 +68,12 @@ namespace GameLogAPI.src.Repositories {
 
             await context.SaveChangesAsync(ct);
         }
+
+        public async Task<IEnumerable<Game>> GetGamesCompleted(CancellationToken ct) {
+            return await context.Games
+                .Where(g => g.Status == GameStatus.Completed)
+                .Include(g => g.Platform)
+                .ToListAsync(ct);
+        }
     }
 }

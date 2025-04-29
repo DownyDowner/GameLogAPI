@@ -21,6 +21,10 @@ namespace GameLogAPI.src.Services {
             return await repository.GetAllAsync(ct);
         }
 
+        internal async Task<IEnumerable<Game>> GetGamesCompleted(CancellationToken ct) {
+            return await repository.GetGamesCompleted(ct);
+        }
+
         internal async Task UpdateGameStatus(Guid id, GameStatus status, CancellationToken ct) {
             await repository.UpdateGameStatusAsync(id, status, ct);
         }
