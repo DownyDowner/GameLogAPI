@@ -3,8 +3,15 @@ import avatar from "../assets/avatar.jpg";
 import { mdiMinus, mdiWindowMaximize, mdiClose } from "@mdi/js";
 
 function Links() {
-  const links = [
-    { name: "Mon PC", url: "#" },
+  interface Link {
+    name: string;
+    url?: string;
+  }
+
+  const links: Link[] = [
+    {
+      name: "Mon PC",
+    },
     {
       name: "Instagram",
       url: "https://www.instagram.com/bobov__/",
@@ -60,8 +67,8 @@ function Links() {
           <a
             key={index}
             href={link.url}
-            target="_blank"
-            rel="noopener noreferrer"
+            target={link.url ? "_blank" : undefined}
+            rel={link.url ? "noopener noreferrer" : undefined}
             className="xp-button w-50"
           >
             {link.name}
