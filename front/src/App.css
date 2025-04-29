@@ -51,7 +51,6 @@
 }
 
 .xp-button:hover {
-  transform: translateY(-3px);
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   background-color: #d4d0c8 !important;
   border: 1px solid #0a246a !important;

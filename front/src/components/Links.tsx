@@ -1,16 +1,24 @@
 import Icon from "@mdi/react";
 import avatar from "../assets/avatar.jpg";
 import { mdiMinus, mdiWindowMaximize, mdiClose } from "@mdi/js";
+import { useState } from "react";
+import PcModal from "./PcModal";
 
 function Links() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
+
   interface Link {
     name: string;
     url?: string;
+    onClick?: () => void;
   }
-
   const links: Link[] = [
     {
       name: "Mon PC",
+      onClick: openModal,
     },
     {
       name: "Instagram",
@@ -63,6 +71,7 @@ function Links() {
         <h2 className="h4">DownyDowner</h2>
       </div>
       <div className="d-flex flex-column justify-content-center align-items-center gap-2 px-3 pb-3">
+        <PcModal isOpen={isOpen} onClose={closeModal} />
         {links.map((link, index) => (
           <a
             key={index}
@@ -70,6 +79,7 @@ function Links() {
             target={link.url ? "_blank" : undefined}
             rel={link.url ? "noopener noreferrer" : undefined}
             className="xp-button w-50"
+            onClick={link.onClick}
           >
             {link.name}
           </a>
