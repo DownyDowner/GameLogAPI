@@ -73,6 +73,8 @@ namespace GameLogAPI.src.Repositories {
             return await context.Games
                 .Where(g => g.Status == GameStatus.Completed)
                 .Include(g => g.Platform)
+                .OrderByDescending(g => g.CompletedOn)
+                .ThenBy(g => g.Title)
                 .ToListAsync(ct);
         }
     }
