@@ -1,8 +1,7 @@
-import { mdiClose, mdiMinus, mdiWindowMaximize } from "@mdi/js";
-import Icon from "@mdi/react";
 import { getGamesCompleted } from "../apis/GameApi";
 import { useEffect, useState } from "react";
 import { GameCompletedList } from "../models/GameCompletedList";
+import XpWindow from "../components/XpWindow";
 
 function GamesCompletedList() {
   const [games, setGames] = useState<GameCompletedList[]>([]);
@@ -26,8 +25,8 @@ function GamesCompletedList() {
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, "0"); // Ajoute un 0 si le jour est inférieur à 10
-    const month = String(date.getMonth() + 1).padStart(2, "0"); // Mois commence à 0, donc on ajoute 1
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
     const year = date.getFullYear();
 
     return `${day}/${month}/${year}`;
@@ -37,21 +36,7 @@ function GamesCompletedList() {
   if (error) return <div>{error}</div>;
 
   return (
-    <div className="xp-window p-2 mt-2 w-75">
-      <div className="xp-title-bar d-flex justify-content-between align-items-center">
-        <span>Mes Jeux Complétés</span>
-        <div>
-          <button className="xp-title-button btn btn-sm p-0 mx-1">
-            <Icon path={mdiMinus} size={0.6} />
-          </button>
-          <button className="xp-title-button btn btn-sm p-0 mx-1">
-            <Icon path={mdiWindowMaximize} size={0.6} />
-          </button>
-          <button className="xp-title-button btn btn-sm p-0 mx-1 xp-close-button">
-            <Icon path={mdiClose} size={0.6} />
-          </button>
-        </div>
-      </div>
+    <XpWindow title="Mes Jeux Complétés">
       <ul className="d-flex flex-column justify-content-center align-items-center gap-2 px-3 mt-2">
         {games.length > 0 ? (
           games.map((game) => (
@@ -71,7 +56,7 @@ function GamesCompletedList() {
           <li className="list-unstyled">Pas de Jeux référencés</li>
         )}
       </ul>
-    </div>
+    </XpWindow>
   );
 }
 

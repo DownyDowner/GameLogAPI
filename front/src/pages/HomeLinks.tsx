@@ -1,8 +1,7 @@
-import Icon from "@mdi/react";
+import XpWindow from "../components/XpWindow";
 import avatar from "../assets/avatar.jpg";
-import { mdiMinus, mdiWindowMaximize, mdiClose } from "@mdi/js";
 import { useState } from "react";
-import PcModal from "./PcModal";
+import PcModal from "./HomeLinksPcModal";
 
 function Links() {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,21 +50,7 @@ function Links() {
   ];
 
   return (
-    <div className="xp-window p-2 mt-2 w-75">
-      <div className="xp-title-bar d-flex justify-content-between align-items-center">
-        <span>Mes Liens</span>
-        <div>
-          <button className="xp-title-button btn btn-sm p-0 mx-1">
-            <Icon path={mdiMinus} size={0.6} />
-          </button>
-          <button className="xp-title-button btn btn-sm p-0 mx-1">
-            <Icon path={mdiWindowMaximize} size={0.6} />
-          </button>
-          <button className="xp-title-button btn btn-sm p-0 mx-1 xp-close-button">
-            <Icon path={mdiClose} size={0.6} />
-          </button>
-        </div>
-      </div>
+    <XpWindow title="Mes Liens">
       <div className="p-3 text-center">
         <img src={avatar} alt="Avatar" className="xp-avatar mb-3" />
         <h2 className="h4">DownyDowner</h2>
@@ -85,7 +70,7 @@ function Links() {
           </a>
         ))}
       </div>
-    </div>
+    </XpWindow>
   );
 }
 

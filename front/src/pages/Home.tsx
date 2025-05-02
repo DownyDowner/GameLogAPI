@@ -1,5 +1,5 @@
-import GamesCompletedList from "../components/GamesCompletedList";
-import Links from "../components/Links";
+import GamesCompletedList from "./HomeGamesCompleted";
+import Links from "./HomeLinks";
 
 function Home() {
   return (
