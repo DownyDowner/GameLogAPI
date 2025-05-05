@@ -77,6 +77,50 @@
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
+.xp-avatar {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #808080;
+}
+
+.xp-loading-screen {
+  background-color: #000;
+}
+
+.xp-logo {
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+.xp-progress-bar {
+  width: 200px;
+}
+
+.xp-progress-block {
+  width: 18px;
+  height: 10px;
+  background-color: #333;
+  animation: fillBlock 3s infinite;
+}
+
+@keyframes fillBlock {
+  0% {
+    background-color: #333;
+  }
+  10% {
+    background-color: #a6caf0;
+  }
+  50% {
+    background-color: #a6caf0;
+  }
+  60% {
+    background-color: #333;
+  }
+  100% {
+    background-color: #333;
+  }
+}
+
 h2.h4 {
   font-family: Tahoma, sans-serif;
 }
