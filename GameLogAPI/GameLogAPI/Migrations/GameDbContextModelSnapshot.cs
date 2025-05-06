@@ -52,7 +52,7 @@ namespace GameLogAPI.Migrations
 
                     b.HasIndex("IdPlatform");
 
-                    b.ToTable("Games");
+                    b.ToTable("Games", (string)null);
                 });
 
             modelBuilder.Entity("GameLogAPI.src.Entities.Platform", b =>
@@ -70,7 +70,7 @@ namespace GameLogAPI.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Platforms");
+                    b.ToTable("Platforms", (string)null);
                 });
 
             modelBuilder.Entity("GameLogAPI.src.Entities.Game", b =>
