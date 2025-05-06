@@ -19,7 +19,7 @@ namespace GameLogAPI.src.Entities {
         public DateOnly ReleaseDate { get; set; }
         [Required]
         public GameStatus Status { get; set; } = GameStatus.Wishlist;
-        [Range(1, 10)]
+        [Range(1, 5)]
         public int? Rating { get; set; }
         public string? Review { get; set; }
         public DateTime? StartedOn { get; set; }
