@@ -39,14 +39,8 @@ namespace GameLogAPI.src.Repositories {
             return platform;
         }
 
-        public async Task UpdateNameAsync(Guid id, string name, CancellationToken ct) {
-            var platform = await context.Platforms
-                .FirstOrDefaultAsync(x => x.Id == id, ct);
-
-            if (platform == null)
-                throw new ServiceException($"Cannot update: platform with ID {id} was not found.", StatusCodes.Status404NotFound);
-
-            platform.Name = name;
+        public async Task UpdateAsync(Platform entity, CancellationToken ct) {
+            context.Update(entity);
             await context.SaveChangesAsync(ct);
         }
     }

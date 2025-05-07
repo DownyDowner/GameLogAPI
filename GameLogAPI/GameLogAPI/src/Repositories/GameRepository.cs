@@ -77,5 +77,9 @@ namespace GameLogAPI.src.Repositories {
                 .ThenBy(g => g.Title)
                 .ToListAsync(ct);
         }
+
+        public Task UpdateAsync(Game entity, CancellationToken ct) {
+            throw new NotImplementedException();
+        }
     }
 }

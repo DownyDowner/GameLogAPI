@@ -1,4 +1,5 @@
 ﻿using GameLogAPI.src.Entities;
+using GameLogAPI.src.Exceptions;
 using GameLogAPI.src.Features.Platforms;
 using GameLogAPI.src.Repositories;
 
@@ -22,7 +23,11 @@ namespace GameLogAPI.src.Services {
         }
 
         internal async Task UpdatePlatform(UpdatePlatformRequest req, CancellationToken ct) {
-            await repository.UpdateNameAsync(req.Id, req.Name, ct);
+            var platform = await repository.GetByIdAsync(req.Id, ct);
+            if (platform == null) 
+                throw new ServiceException($"Platform with ID {req.Id} was not found.", StatusCodes.Status404NotFound);
+            platform.Name = req.Name;
+            await repository.UpdateAsync(platform, ct);
         }
     }
 }

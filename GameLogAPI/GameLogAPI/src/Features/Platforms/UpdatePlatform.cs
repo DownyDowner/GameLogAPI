@@ -1,8 +1,6 @@
 ﻿using FastEndpoints;
 using FluentValidation;
 using GameLogAPI.src.Services;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Primitives;
 
 namespace GameLogAPI.src.Features.Platforms {
     public class UpdatePlatformEndpoint(PlatformService service) : Endpoint<UpdatePlatformRequest> {
