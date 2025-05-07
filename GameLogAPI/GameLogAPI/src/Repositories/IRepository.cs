@@ -4,5 +4,6 @@
         Task<IEnumerable<T>> GetAllAsync(CancellationToken ct);
         Task<T> GetByIdAsync(Guid id, CancellationToken ct);
         Task DeleteAsync(Guid id, CancellationToken ct);
+        Task UpdateAsync(T entity, CancellationToken ct);
     }
 }

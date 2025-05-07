@@ -77,5 +77,10 @@ namespace GameLogAPI.src.Repositories {
                 .ThenBy(g => g.Title)
                 .ToListAsync(ct);
         }
+
+        public async Task UpdateAsync(Game entity, CancellationToken ct) {
+            context.Update(entity);
+            await context.SaveChangesAsync(ct);
+        }
     }
 }
