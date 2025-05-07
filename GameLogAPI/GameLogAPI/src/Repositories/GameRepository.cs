@@ -78,8 +78,9 @@ namespace GameLogAPI.src.Repositories {
                 .ToListAsync(ct);
         }
 
-        public Task UpdateAsync(Game entity, CancellationToken ct) {
-            throw new NotImplementedException();
+        public async Task UpdateAsync(Game entity, CancellationToken ct) {
+            context.Update(entity);
+            await context.SaveChangesAsync(ct);
         }
     }
 }

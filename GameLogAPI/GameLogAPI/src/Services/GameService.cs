@@ -1,4 +1,5 @@
 ﻿using GameLogAPI.src.Entities;
+using GameLogAPI.src.Exceptions;
 using GameLogAPI.src.Features.Games;
 using GameLogAPI.src.Repositories;
 
@@ -23,6 +24,21 @@ namespace GameLogAPI.src.Services {
 
         internal async Task<IEnumerable<Game>> GetGamesCompleted(CancellationToken ct) {
             return await repository.GetGamesCompleted(ct);
+        }
+
+        internal async Task UpdateGame(UpdateGameRequest req, CancellationToken ct) {
+            var game = await repository.GetByIdAsync(req.Id, ct);
+            if (game == null)
+                throw new ServiceException($"Game with ID {req.Id} was not found.", StatusCodes.Status404NotFound);
+            game.Title = req.Title;
+            game.IdPlatform = req.IdPlatform;
+            game.ReleaseDate = req.ReleaseDate;
+            game.Status = req.Status;
+            game.Rating = req.Rating;
+            game.Review = req.Review;
+            game.StartedOn = req.StartedOn;
+            game.CompletedOn = req.CompletedOn;
+            await repository.UpdateAsync(game, ct);
         }
 
         internal async Task UpdateGameStatus(Guid id, GameStatus status, CancellationToken ct) {
